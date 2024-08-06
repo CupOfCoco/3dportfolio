@@ -1,0 +1,451 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@100..900&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  --header-height: 3.5rem;
+
+  /*========== Colors ==========*/
+  /*Color mode HSL(hue, saturation, lightness)*/
+  --orange-color: hsl(36, 90%, 54%);
+  --container-color: hsl(206, 4%, 10%);
+  --body-color: hsl(206, 4%, 6%);
+  --white-color: hsl(0, 0%, 100%);
+  --black-color: hsl(206, 4%, 4%);
+  --black-color-2: hsl(206, 4%, 8%);
+  --title-color: hsl(206, 4%, 95%);
+  --text-color: hsl(206, 4%, 75%);
+
+
+  /*========== Font and typography ==========*/
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --body-font: "Montserrat", sans-serif;
+  --second-font: "Dancing Script", cursive;
+  --biggest-font-size: 5rem;
+  --big-font-size: 2rem;
+  --normal-font-size: .938rem;
+  --small-font-size: .813rem;
+
+
+  /*========== Font weight ==========*/
+  --font-regular: 400;
+  --font-semi-bold: 600;
+  --font-bold: 700;
+
+  /*========== z index ==========*/
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
+
+/*========== Responsive typography ==========*/
+@media screen and (min-width: 1150px) {
+  :root {
+    --biggest-font-size: 25rem;
+    --big-font-size: 6rem;
+    --normal-font-size: 1rem;
+    --small-font-size: .875rem;
+  }
+}
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+.grid{
+  display: grid;
+}
+html{
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  color: var(--text-color);
+  margin: 3rem 0 0 0;
+  
+  background-color: var(--body-color);
+}
+
+h1,h2,h3{
+  color: var(--title-color);
+}
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  /* display: block; */
+  max-width: 100%;
+  height: auto;
+}
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+
+.section{
+  padding: 4rem 0 2rem;
+  cursor: none;
+}
+.inner-cursor{
+  position: fixed;
+  z-index: 100;
+  left: 10px;
+  width: 8px;
+  height: 8px;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  mix-blend-mode: difference;
+  border-radius: 50%;
+  pointer-events: none;
+  transition: width 0.5s, height 0.5s;
+}
+.inner-cursor.grow{
+  z-index: 100;
+  width: 15px;
+  height: 15px;
+  transition: width 0.5s, height 0.5s;
+}
+.outer-cursor{
+  position: fixed;
+  z-index: 100;
+  left: 10px;
+  width: 15px;
+  height: 15px;
+  transform: translate(-50%, -50%); 
+  border: 1px solid #fff;
+  mix-blend-mode: difference;
+  border-radius: 50%;
+  transition: 0.1s;
+}
+.section-title{
+  font-size: var(--biggest-font-size);
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.section-title-gradient{
+  background: linear-gradient(hsl(206, 4%, 24%), hsl(206, 4%, 8%));
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+
+.container {
+  max-width: 1120px;
+  margin-right: 1.5rem;
+  margin-left: 1.5rem;
+}
+
+.main {
+  overflow: hidden;
+}
+
+
+
+/*=============== HEADER & NAV ===============*/
+.header{
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-fixed);
+  background: transparent;
+}
+
+.nav{
+  height: 3.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-logo{
+  display: flex;
+  font-size: 1.2rem;
+  font-weight: var(--font-semi-bold);
+  color: #fff;
+
+}
+.nav-toggle{
+  font-size: 1.2rem;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+}
+@media screen and (max-width: 1150px){
+  .nav-menu{
+    position: fixed;
+    /* background-color: var(--body-color); */
+    background: url(../img/img55.jpg) no-repeat;
+    background-position: center;
+    background-size: cover;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    transition: .3s;
+    padding-block: 5.5rem 4.5rem;
+    backdrop-filter: blur(32px);
+    -webkit-backdrop-filter: blur(32px);
+
+  }
+}
+.nav-list{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  row-gap: 3rem;
+  padding-top: 9rem;
+}
+.nav-link{
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 1.25rem;
+  transition: .3s;
+  font-weight: var(--font-semi-bold);
+  background: linear-gradient(hsl(206, 4%, 24%), hsl(206, 4%, 8%));
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.nav-link:hover{
+  color: transparent;
+  background: #fff;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.nav-close{
+  font-size: 1.5rem;
+  color: #fff;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+}
+/* Show menu */
+.show-menu{
+  right: 0;
+}
+.scroll-header{
+  background-color: var(--body-color);
+}
+/* Add blur header */
+
+
+/*=============== HOME ===============*/
+.home{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-header{
+  position: absolute;
+  top: 35%;
+  left: 10%;
+  transform: translateY(-50%);
+  max-width: 700px;
+}
+.home-header h1,
+.home-header h2{
+  position: relative;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  transform-origin: left;
+  transform: scaleX(0);
+  animation: revealTextReverse 1s ease-in-out forwards;
+}
+
+.home-title{
+  font-size: 6em;
+  background: linear-gradient(hsl(206, 4%, 24%), hsl(206, 4%, 8%));
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation-delay: 1s;
+
+}
+.home-subtitle{
+  font-size: 3em;
+  animation-delay: 2s;
+}
+.home-title::before,
+.home-subtitle::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #000;
+  width: 100%;
+  height: 100%;
+  transform-origin: right;
+  animation: revealText 1s ease-in-out forwards;
+  animation-delay: 1s;
+}
+.home-subtitle::before{
+  animation-delay: 2s;
+}
+@keyframes revealText {
+  0%{
+    transform: scaleX(1);
+  }
+  100%{
+    transform: scaleX(0);
+  }
+}
+@keyframes revealTextReverse {
+  0%{
+    transform: scaleX(0);
+  }
+  100%{
+    transform: scaleX(1);
+  }
+}
+.box{
+  display: flex;
+}
+.box .eye{
+  position: relative;
+  width: 60px;
+  height: 60px;
+  display: block;
+  background: #fff;
+  margin: 0 15px;
+  border-radius: 50%;
+  box-shadow: 0 5px 45px rgba(0,0,0,0.2),
+              inset 0 0 15px #313131,
+              inset 0 0 25px #313131;
+}
+.box .eye::before{
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 25px;
+  transform: translate(-50%, -50%);
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #000;
+  border: 5px solid #1d1c1c;
+  box-sizing: border-box;
+}
+.element1{
+  opacity: 0;
+  position: absolute;
+  bottom: -180px;
+  right: 40%;
+  width: 250px;
+  height: 250px;
+  border: 10px solid #fff;
+  animation: rotate 40s linear infinite, fadeIn 1s linear forwards;
+  animation-delay: 3s;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.element2{
+  opacity: 0;
+  position: absolute;
+  left: -10px;
+  top: 30%;
+  width: 50px;
+  height: 50px;
+  border: 2px solid #fff;
+  animation: rotate 30s linear infinite, fadeIn 1s linear forwards;
+  animation-delay: 3s;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(45deg);
+  }
+  100% {
+    transform: rotate(405deg);
+  }
+}
+
+
+#vertical-text{
+  transform: rotate(90deg);
+  transform-origin: 0% 0%;
+  z-index: 1;
+}
+
+#vertical-text{
+  position: absolute;
+  right: -150%;
+  transform: rotate(90deg);
+  transform-origin: 0% 0%;
+  z-index: -7%;
+  /* width: 100%; */
+  /* background-color: red; */
+}
+
+#vertical-text h1{
+  font-size: 70px;
+  font-weight: 900;
+  color: transparent;
+  letter-spacing: 15px;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: #fff;
+}
+.hero-model{
+  position: absolute;
+}
+modal-viewer{
+  width: 53vw;
+  height: 95vh;
+  z-index: 1000000;
+}
+/* Swiper class */
+
+
+/* Swiper animation */
+
+
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+
+
+/* For medium devices */
+
+
+/* For large devices */
+@media screen and (min-width: 1150px) {
+  .container{
+    margin-inline: auto;
+  }
+  .section{
+    padding-block: 7rem 2rem;
+  }
+  .section-title{
+    font-size: var(--big-font-size);
+  }
+  nav{
+    height: calc(3.5rem + 2rem);
+  }
+}
+/* .nav-toggle, .nav-close{
+  display: none;
+} */
+/* .nav-list{
+  flex-direction: row;
+  column-gap: 4.5rem;
+} */
+.home-container{
+  position: relative;
+}
+
+/* For taller devices 
